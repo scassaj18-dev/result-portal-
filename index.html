@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Suguna College Result Portal - 2026</title>
+
+<style>
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-image: url("college.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+/* HEADER */
+.header {
+    background-color: #003366;
+    color: white;
+    padding: 15px;
+}
+
+.logo {
+    width: 90px;
+}
+
+/* INPUT BOX */
+.box {
+    background: white;
+    width: 350px;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px #bbb;
+    text-align: left;
+}
+
+label {
+    font-weight: bold;
+    color: #003366;
+}
+
+input {
+    width: 95%;
+    padding: 10px;
+    margin: 8px 0 15px 0;
+    border: 1px solid #003366;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background: #003366;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #001f40;
+}
+
+/* RESULT */
+.result {
+    background: white;
+    width: 380px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px #ccc;
+    display: none;
+    text-align: left;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid #003366;
+    padding: 8px;
+    text-align: center;
+}
+
+th {
+    background: #d7e8ff;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <img src="logo.png" class="logo">
+    <h1>Suguna College of Arts & Science</h1>
+    <h2>UG / PG Examination Results - May 2026</h2>
+</div>
+
+<!-- INPUT -->
+<div class="box">
+    <label>Register Number</label>
+    <input type="text" id="regno">
+
+    <label>Date of Birth</label>
+    <input type="date" id="dob">
+
+    <button onclick="getResult()">Get Result</button>
+</div>
+
+<!-- RESULT -->
+<div class="result" id="resultBox">
+    <h3 id="name"></h3>
+
+    <table>
+        <tr><th>Subject</th><th>Marks</th></tr>
+        <tr><td>Tamil</td><td id="tamil"></td></tr>
+        <tr><td>English</td><td id="english"></td></tr>
+        <tr><td>Maths</td><td id="maths"></td></tr>
+        <tr><td>JAVA</td><td id="java"></td></tr>
+        <tr><td>PYTHON</td><td id="python"></td></tr>
+        <tr><td>INTERNET BASICS</td><td id="internetBasics"></td></tr>
+    </table>
+
+    <h3 id="total"></h3>
+    <h3 id="status"></h3>
+</div>
+
+<script>
+const students = {
+    "1001": { dob:"2006-01-01", name:"Ravi", tamil:98, english:97, maths:81, java:95, python:98, internetBasics:90 },
+    "1002": { dob:"2006-11-09", name:"Anjali", tamil:88, english:85, maths:90, java:92, python:89, internetBasics:91 },
+    "1003": { dob:"2006-03-20", name:"Vijay", tamil:67, english:72, maths:80, java:70, python:75, internetBasics:78 }
+};
+
+function getResult() {
+    let reg = document.getElementById("regno").value;
+    let dob = document.getElementById("dob").value;
+
+    if (students[reg] && students[reg].dob === dob) {
+
+        let s = students[reg];
+
+        document.getElementById("resultBox").style.display = "block";
+
+        document.getElementById("name").innerText = "Name: " + s.name;
+
+        document.getElementById("tamil").innerText = s.tamil;
+        document.getElementById("english").innerText = s.english;
+        document.getElementById("maths").innerText = s.maths;
+        document.getElementById("java").innerText = s.java;
+        document.getElementById("python").innerText = s.python;
+        document.getElementById("internetBasics").innerText = s.internetBasics;
+
+        let total = s.tamil + s.english + s.maths + s.java + s.python + s.internetBasics;
+
+        document.getElementById("total").innerText = "Total: " + total;
+
+        document.getElementById("status").innerText =
+            total >= 350 ? "STATUS: PASS ✅" : "STATUS: FAIL ❌";
+
+    } else {
+        alert("Invalid Register Number or DOB!");
+    }
+}
+</script>
+
+</body>
+</html>
