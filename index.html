@@ -2,17 +2,25 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Suguna College Result Portal - 2026</title>
 
 <style>
-body {
+
+body{
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
     text-align: center;
-    background-image: url("college.jpg");
+
+    min-height: 100vh;
+
+    background-image: url('college.jpg');
+    background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
 }
 
 /* HEADER */
@@ -37,11 +45,13 @@ body {
     text-align: left;
 }
 
+/* LABEL */
 label {
     font-weight: bold;
     color: #003366;
 }
 
+/* INPUT */
 input {
     width: 95%;
     padding: 10px;
@@ -50,6 +60,7 @@ input {
     border-radius: 5px;
 }
 
+/* BUTTON */
 button {
     width: 100%;
     padding: 10px;
@@ -58,13 +69,14 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-size: 16px;
 }
 
 button:hover {
     background: #001f40;
 }
 
-/* RESULT */
+/* RESULT BOX */
 .result {
     background: white;
     width: 380px;
@@ -76,6 +88,7 @@ button:hover {
     text-align: left;
 }
 
+/* TABLE */
 table {
     width: 100%;
     border-collapse: collapse;
@@ -90,6 +103,33 @@ table, th, td {
 th {
     background: #d7e8ff;
 }
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 768px) {
+
+    body{
+        background-attachment: scroll;
+    }
+
+    .box,
+    .result{
+        width: 90%;
+        padding: 15px;
+    }
+
+    input{
+        width: 92%;
+    }
+
+    h1{
+        font-size: 24px;
+    }
+
+    h2{
+        font-size: 18px;
+    }
+}
+
 </style>
 </head>
 
@@ -104,6 +144,7 @@ th {
 
 <!-- INPUT -->
 <div class="box">
+
     <label>Register Number</label>
     <input type="text" id="regno">
 
@@ -111,34 +152,97 @@ th {
     <input type="date" id="dob">
 
     <button onclick="getResult()">Get Result</button>
+
 </div>
 
 <!-- RESULT -->
 <div class="result" id="resultBox">
+
     <h3 id="name"></h3>
 
     <table>
-        <tr><th>Subject</th><th>Marks</th></tr>
-        <tr><td>Tamil</td><td id="tamil"></td></tr>
-        <tr><td>English</td><td id="english"></td></tr>
-        <tr><td>Maths</td><td id="maths"></td></tr>
-        <tr><td>JAVA</td><td id="java"></td></tr>
-        <tr><td>PYTHON</td><td id="python"></td></tr>
-        <tr><td>INTERNET BASICS</td><td id="internetBasics"></td></tr>
+        <tr>
+            <th>Subject</th>
+            <th>Marks</th>
+        </tr>
+
+        <tr>
+            <td>Tamil</td>
+            <td id="tamil"></td>
+        </tr>
+
+        <tr>
+            <td>English</td>
+            <td id="english"></td>
+        </tr>
+
+        <tr>
+            <td>Maths</td>
+            <td id="maths"></td>
+        </tr>
+
+        <tr>
+            <td>JAVA</td>
+            <td id="java"></td>
+        </tr>
+
+        <tr>
+            <td>PYTHON</td>
+            <td id="python"></td>
+        </tr>
+
+        <tr>
+            <td>INTERNET BASICS</td>
+            <td id="internetBasics"></td>
+        </tr>
     </table>
 
     <h3 id="total"></h3>
     <h3 id="status"></h3>
+
 </div>
 
 <script>
+
 const students = {
-    "1001": { dob:"2006-01-01", name:"Ravi", tamil:98, english:97, maths:81, java:95, python:98, internetBasics:90 },
-    "1002": { dob:"2006-11-09", name:"Anjali", tamil:88, english:85, maths:90, java:92, python:89, internetBasics:91 },
-    "1003": { dob:"2006-03-20", name:"Vijay", tamil:67, english:72, maths:80, java:70, python:75, internetBasics:78 }
+
+    "1001": {
+        dob:"2006-01-01",
+        name:"Ravi",
+        tamil:98,
+        english:97,
+        maths:81,
+        java:95,
+        python:98,
+        internetBasics:90
+    },
+
+    "1002": {
+        dob:"2006-11-09",
+        name:"Fraudanjal",
+        tamil:88,
+        english:85,
+        maths:90,
+        java:92,
+        python:89,
+        internetBasics:91
+    },
+
+    "1003": {
+        dob:"2003-06-29",
+        name:"Jai Suryaa",
+        tamil:67,
+        english:72,
+        maths:80,
+        java:70,
+        python:75,
+        internetBasics:78
+    }
+
 };
 
 function getResult() {
+
     let reg = document.getElementById("regno").value;
     let dob = document.getElementById("dob").value;
 
@@ -148,26 +252,50 @@ function getResult() {
 
         document.getElementById("resultBox").style.display = "block";
 
-        document.getElementById("name").innerText = "Name: " + s.name;
+        document.getElementById("name").innerText =
+            "Name: " + s.name;
 
-        document.getElementById("tamil").innerText = s.tamil;
-        document.getElementById("english").innerText = s.english;
-        document.getElementById("maths").innerText = s.maths;
-        document.getElementById("java").innerText = s.java;
-        document.getElementById("python").innerText = s.python;
-        document.getElementById("internetBasics").innerText = s.internetBasics;
+        document.getElementById("tamil").innerText =
+            s.tamil;
 
-        let total = s.tamil + s.english + s.maths + s.java + s.python + s.internetBasics;
+        document.getElementById("english").innerText =
+            s.english;
 
-        document.getElementById("total").innerText = "Total: " + total;
+        document.getElementById("maths").innerText =
+            s.maths;
+
+        document.getElementById("java").innerText =
+            s.java;
+
+        document.getElementById("python").innerText =
+            s.python;
+
+        document.getElementById("internetBasics").innerText =
+            s.internetBasics;
+
+        let total =
+            s.tamil +
+            s.english +
+            s.maths +
+            s.java +
+            s.python +
+            s.internetBasics;
+
+        document.getElementById("total").innerText =
+            "Total: " + total;
 
         document.getElementById("status").innerText =
-            total >= 350 ? "STATUS: PASS ✅" : "STATUS: FAIL ❌";
+            total >= 350
+            ? "STATUS: PASS ✅"
+            : "STATUS: FAIL ❌";
 
     } else {
+
         alert("Invalid Register Number or DOB!");
+
     }
 }
+
 </script>
 
 </body>
